@@ -3,17 +3,16 @@
 using slqalchemy"""
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import crate_engine
+from sqlalchemy import create_engine
 import equi_model
 #from equi_model.product import Product
 from equi_model.order import Order
 #from equi_model.city import City
 #from equi_model.state import State
 from equi_model.user import User
-from equi_model.base_model import BaseModel
+from equi_model.base_model import BaseModel, Base
 
-classes = {'User': User, 'City': City, 'State': State, 'Order': Order,
-            'Product': Product}
+classes = {'User': User, 'Order': Order}
 class EquiSQLstore:
     """Defines a variable for connecting and querying
     MySQL database"""
@@ -21,13 +20,13 @@ class EquiSQLstore:
     search = None
 
     def __init__(self):
-        user = getenv("EQUIMED_DB_MYSQL_USER")
-        password = getenv("EQUIMED_DB_MYSQL_PWD")
-        database = getenv("EQUIMED_DB_MYSQL_DB")
-        host = getenv("EQUIMED_DB_MYSQL_HOST")
+        user = 'johnharry'
+        password = 'johnharry'
+        database = 'EquiMed_db'
+        host = 'localhost'
         env = getenv("EQUIMED_DB_ENV")
 
-        self.connect = create_engine('mysql+mysqldb://{}:{}@{}//{}'
+        self.connect = create_engine('mysql+mysqldb://{}:{}@{}/{}'
                                     .format(user, password, host, database),
                                     pool_pre_ping=True)
 
@@ -80,9 +79,9 @@ class EquiSQLstore:
         """Returns obj based on the class name and its ID"""
         if cls not in classes.values():
             return None
-        all_cls = equi_model.storage.all(cls):
-            for x in all_cls.values():
-                if (x.id == id):
+        all_cls = equi_model.storage.all(cls)
+        for x in all_cls.values():
+            if (x.id == id):
                     return x
         return None
 

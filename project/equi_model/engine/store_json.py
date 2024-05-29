@@ -11,8 +11,7 @@ from equi_model.order import Order
 import shlex
 
 
-classes = {'User': User, 'State': State, 'City': City, 
-            'Order': Order, 'Product': Product}
+classes = {'User': User, 'Order': Order}
 
 class Store_Json:
     """Saves instances to JSON file and 

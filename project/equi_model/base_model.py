@@ -16,10 +16,10 @@ class BaseModel:
     """Class that defines common attributes
     and method for class inheritance
     """
-    if getenv("EQUIMED_DB_TYPE_STORAGE") == "db":
-        id = Column(String(60), primary_key=True)
-        created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
-        updated_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
+#    if getenv("EQUIMED_DB_TYPE_STORAGE") == "db":
+    id = Column(String(60), primary_key=True)
+    created_at = Column(Date, nullable=False, default=datetime.utcnow())
+    updated_at = Column(Date, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *arg, **kwarg):
         """Constructor that instiantiates object
