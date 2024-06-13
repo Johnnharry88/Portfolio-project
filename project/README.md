@@ -1,5 +1,5 @@
 ============EquiMed==============
-EquiMEd is an online web application that offers rapid delivery of medical equipments to hospitals inorder to improve the quality of health delivery and save lives in return. 
+EquiMed is an online web application that offers rapid delivery of medical equipments to hospitals inorder to improve the quality of health delivery and save lives in return. it was born out of passion to assist the health sector improve in the quality service. The road to developing EquiMed was not a smooth one as challenges was encountered. These challenges includes sleepless nights, little power supply, sleeping in differnt locations and making researches on line
 here is the link to the site
 www.equimed.tech
 
