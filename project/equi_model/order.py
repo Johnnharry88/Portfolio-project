@@ -8,6 +8,8 @@ from sqlalchemy import Column, String, Date, ForeignKey
 
 class Order(BaseModel, Base):
     #if getenv("EQUIMED_DB_TYPE_STORAGE") == "db":
-    __tablename__ = "orders"
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-    date = Column(Date, default = datetime.today(), nullable=False)
+#    __tablename__ = "orders"
+#    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+#    date = Column(Date, default = datetime.today(), nullable=False)
+order_date = datetime.date()
+

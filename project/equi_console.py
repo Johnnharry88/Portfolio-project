@@ -79,6 +79,7 @@ class EquiCommand(cmd.Cmd):
         print()
         print('Usage: create <clasname>\n')
 
+    #implementing the create function
     def do_create(self, args):
         """Cretes Object of any class"""
         try:
@@ -106,6 +107,7 @@ class EquiCommand(cmd.Cmd):
         print()
         print("Usage: display ,classname> <objectid>\n")
 
+    #implementing the display function
     def do_display(self, args):
         """Method that displays individual object"""
         x = args.partition(" ")
@@ -140,6 +142,7 @@ class EquiCommand(cmd.Cmd):
         print()
         print("else deletes the entire class\n")
 
+    #implementing the del function
     def do_del(self, args):
         """Deletes a specific object ont entire class if not specified with id """
         x = args.partition(" ")
@@ -169,12 +172,14 @@ class EquiCommand(cmd.Cmd):
             storage.save()
         except KeyError:
             print('no instance matching request')
+
     def help_count(self):
         """Help documentation for count"""
         print("Counts the object belonging to a class")
         print()
         print('Usage: command <classname>i\n')
 
+    #implementing the count funciton
     def do_count(self, args):
         """Counts the number of obj in a class instance"""
         if args not in EquiCommand().classes:
@@ -193,6 +198,7 @@ class EquiCommand(cmd.Cmd):
         print()
         print('Usage: command')
 
+    #implementing the all function
     def do_all(self, args):
         """Displays all classes in the App"""
         obj = storage.all()
@@ -206,6 +212,7 @@ class EquiCommand(cmd.Cmd):
         print()
         print('Usage: command <classname> <id> <attval>\n')
 
+    #implementing the update function
     def do_update(self, args):
         """Updates a certain object with new info"""
         x_name = x_id = att_name = att_val = kwargs = ''

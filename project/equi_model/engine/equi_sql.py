@@ -5,10 +5,10 @@ from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 import equi_model
-#from equi_model.product import Product
+from equi_model.product import Product
 from equi_model.order import Order
-#from equi_model.city import City
-#from equi_model.state import State
+from equi_model.city import City
+from equi_model.state import State
 from equi_model.user import User
 from equi_model.base_model import BaseModel, Base
 
