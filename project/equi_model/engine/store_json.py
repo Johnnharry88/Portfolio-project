@@ -4,14 +4,17 @@ import json
 import equi_model
 from equi_model.base_model import BaseModel
 from equi_model.user import User
-#from equi_model.state import State
-#from equi_model.city import City
+from equi_model.state import State
+from equi_model.city import City
 from equi_model.order import Order
-#from equi_model.product import Product
+#from equi_model.gause import Gause
+#from equi_model.steth import Steth
+#from equi_model.forcepts import Forcept
+#from equi_model.syringes import Syringe
 import shlex
 
 
-classes = {'User': User, 'Order': Order}
+classes = {'User': User, 'Order': Order, "State": State, "City": City} #"Steth": Steth, "Forcept": Forcept, "Gause": Gause, "Syringe": Syringe}
 
 class Store_Json:
     """Saves instances to JSON file and 
@@ -55,9 +58,9 @@ class Store_Json:
         """Loads file form Json file equi_med.json"""
         try:
             with open(self.path_json, 'r', encoding="utf-8") as f:
-                for key, value in (json.load(f)).items():
-                    value = eval(value["__class__"])(**value)
-                    self.equi_obj[key] = value
+                for k, v in (json.load(f)).items():
+                    v = eval(v["__class__"])(**v)
+                    self.equi_obj[k] = v
         except FileNotFoundError:
             pass
 

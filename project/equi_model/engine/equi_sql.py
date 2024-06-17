@@ -5,14 +5,19 @@ from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 import equi_model
-#from equi_model.product import Product
+from equi_model.gause import Gause
+from equi_model.forcepts import Forcept
+from equi_model.steth import Steth
+from equi_model.syringes import Syringe
 from equi_model.order import Order
-#from equi_model.city import City
-#from equi_model.state import State
+from equi_model.city import City
+from equi_model.state import State
 from equi_model.user import User
 from equi_model.base_model import BaseModel, Base
 
-classes = {'User': User, 'Order': Order}
+classes = {'User': User, 'Order': Order, 'State': State, 'City': City, 'Steth': Steth, 'Gause': Gause, 'Syringe': Syringe, 'Forcept': Forcept}
+
+
 class EquiSQLstore:
     """Defines a variable for connecting and querying
     MySQL database"""
@@ -20,11 +25,11 @@ class EquiSQLstore:
     search = None
 
     def __init__(self):
-        user = 'johnharry'
-        password = 'johnharry'
-        database = 'EquiMed_db'
-        host = 'localhost'
-        env = getenv("EQUIMED_DB_ENV")
+        user = getenv('USER')
+        password = getenv('PASSWORD')
+        database = getenv('DATABASE')
+        host = getenv('HOST')
+        env = getenv("EQUIMED_ENV")
 
         self.connect = create_engine('mysql+mysqldb://{}:{}@{}/{}'
                                     .format(user, password, host, database),

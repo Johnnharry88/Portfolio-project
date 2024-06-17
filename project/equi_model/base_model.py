@@ -7,8 +7,9 @@ from datetime import datetime
 from sqlalchemy import Column, String, Date
 from sqlalchemy.ext.declarative import declarative_base
 from os import getenv
+import json
 
-
+datastore = getenv('DATASTORE')
 Base = declarative_base()
 
 
@@ -16,10 +17,10 @@ class BaseModel:
     """Class that defines common attributes
     and method for class inheritance
     """
-#    if getenv("EQUIMED_DB_TYPE_STORAGE") == "db":
-    id = Column(String(60), primary_key=True)
-    created_at = Column(Date, nullable=False, default=datetime.utcnow())
-    updated_at = Column(Date, nullable=False, default=datetime.utcnow())
+    if datastore == "sql":
+        id = Column(String(60), primary_key=True)
+        created_at = Column(Date, nullable=False, default=datetime.utcnow())
+        updated_at = Column(Date, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *arg, **kwarg):
         """Constructor that instiantiates object
@@ -27,18 +28,22 @@ class BaseModel:
         """
         if len(kwarg) > 0:
             for k, v in kwarg.items():
-                if k == '__class__':
-                    continue
-                if k == 'created_at':
-                    v = datetime.fromisoformat(v)
-                if k == 'updated_at':
-                    v = datetime.fromisoformat(v)
-                setattr(self, k, v)
+                if k != '__class__':
+                    setattr(self, k, v)
+                if kwarg.get("created_at", None) and type(self.created_at) is str:
+                    self.created_at = datetime.strptime(kwarg["created_at"], time)
+                else:
+                    self.created_at = datetime.utcnow()
+                if kwarg.get("updated_at", None) and type(self.created_at) is str:
+                    self.updated_at = datetime.strptime(kwarg["updated-at"], time)
+                else:
+                    self.updated_at = datetime.utcnow()
+                if kwarg.get("id", None) is None:
+                    self.id = str(uuid.uuid4())
             return
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        equi_model.storage.new(self)
 
     def __str__(self):
         """String Representation of instance
@@ -50,6 +55,7 @@ class BaseModel:
         """updates changes using the current date and time
         and saves it to Json file"""
         self.updated_at = datetime.now()
+        equi_model.storage.new(self)
         equi_model.storage.save()
   
     def dict_pro(self):
